@@ -1,11 +1,97 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15" version="28.0.6">
   <diagram name="第 1 页" id="UpG260RGQ5BDikE34xAc">
-    <mxGraphModel dx="704" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="986" dy="1894" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="0t7gihegi8niAqoDsI1X-1" value="Is there an empty cell in the board ?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="170" y="70" width="120" height="60" as="geometry" />
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="20" y="-650" width="920" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-3" value="Find an empty cell.&lt;div&gt;Try number from&amp;nbsp;&lt;/div&gt;&lt;div&gt;1 to 9&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="-250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-4" value="Is there an empty cell in the board ?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="-380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-18" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=12;endSize=5.68;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="-350.5" as="sourcePoint" />
+            <mxPoint x="490" y="-350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-19" value="no empty cell" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="390" y="-380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-21" value="Solution gained" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="-380" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-23" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=10;endSize=7.67;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="-350" as="sourcePoint" />
+            <mxPoint x="650" y="-350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-24" value="Break" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="-380" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-25" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0.417;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;endWidth=13;endSize=6.66;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="329.5" y="-320" as="sourcePoint" />
+            <mxPoint x="329.53999999999996" y="-250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-27" value="empty cell exists" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-310" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-28" value="Check for each number" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="265" y="-140" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-30" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endWidth=12;endSize=6.33;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-3" target="7Jx4ejaxejRJG-kNBLlu-28">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="530" y="-120" as="sourcePoint" />
+            <mxPoint x="580" y="-170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-31" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-28">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="-50" as="sourcePoint" />
+            <mxPoint x="470" y="-110" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-32" value="Valid" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="-140" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-36" value="solve" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-480" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-37" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endWidth=10;endSize=5.67;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-36" target="7Jx4ejaxejRJG-kNBLlu-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="-170" as="sourcePoint" />
+            <mxPoint x="570" y="-220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-40" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-32" target="7Jx4ejaxejRJG-kNBLlu-36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="530" y="-110" as="sourcePoint" />
+            <mxPoint x="580" y="-160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="540" y="-150" />
+              <mxPoint x="530" y="-350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-41" value="Remove the number of the present cell.&lt;div&gt;This is preparing for backtracking.&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="-20" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-43" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-28" target="7Jx4ejaxejRJG-kNBLlu-41">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="850" y="-218" as="sourcePoint" />
+            <mxPoint x="490" y="-2" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-44" value="Not valid" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-100" width="30" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
