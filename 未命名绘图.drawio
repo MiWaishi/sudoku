@@ -1,14 +1,14 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15" version="28.0.6">
   <diagram name="第 1 页" id="UpG260RGQ5BDikE34xAc">
-    <mxGraphModel dx="549" dy="1869" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="1207" dy="1989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="20" y="-660" width="920" height="920" as="geometry" />
         </mxCell>
-        <mxCell id="7Jx4ejaxejRJG-kNBLlu-3" value="Find an empty cell.&lt;div&gt;Try number from&amp;nbsp;&lt;/div&gt;&lt;div&gt;1 to 9&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="274" y="-240" width="120" height="60" as="geometry" />
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-3" value="As to an empty cell:&lt;div&gt;Try number from 1 to 9&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="267" y="-240" width="126" height="60" as="geometry" />
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-19" value="no&lt;div&gt;empty cell&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="400" y="-370" width="90" height="30" as="geometry" />
@@ -16,14 +16,11 @@
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-21" value="Solution gained" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="500" y="-365" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7Jx4ejaxejRJG-kNBLlu-24" value="Break" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="630" y="-365" width="60" height="60" as="geometry" />
-        </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-27" value="empty cell exists" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="340" y="-290" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-32" value="Recursion" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="10" width="70" height="60" as="geometry" />
+          <mxGeometry x="295" y="10" width="70" height="60" as="geometry" />
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-36" value="solve" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="300" y="-480" width="60" height="60" as="geometry" />
@@ -44,7 +41,7 @@
           <mxGeometry x="250" y="-380" width="160" height="90" as="geometry" />
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-62" value="&lt;div&gt;Check for each number&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="250" y="-130" width="170" height="90" as="geometry" />
+          <mxGeometry x="245" y="-130" width="170" height="90" as="geometry" />
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-69" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-36" target="7Jx4ejaxejRJG-kNBLlu-57">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -70,9 +67,9 @@
             <mxPoint x="450" y="-210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7Jx4ejaxejRJG-kNBLlu-74" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-47" target="7Jx4ejaxejRJG-kNBLlu-32">
+        <mxCell id="7Jx4ejaxejRJG-kNBLlu-74" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-62" target="7Jx4ejaxejRJG-kNBLlu-32">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="-160" as="sourcePoint" />
+            <mxPoint x="334" y="-40" as="sourcePoint" />
             <mxPoint x="450" y="-210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -88,12 +85,6 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="7Jx4ejaxejRJG-kNBLlu-77" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.109;exitY=1.171;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-19" target="7Jx4ejaxejRJG-kNBLlu-21">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="-160" as="sourcePoint" />
-            <mxPoint x="450" y="-210" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="7Jx4ejaxejRJG-kNBLlu-78" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7Jx4ejaxejRJG-kNBLlu-21" target="7Jx4ejaxejRJG-kNBLlu-24">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="400" y="-160" as="sourcePoint" />
             <mxPoint x="450" y="-210" as="targetPoint" />
