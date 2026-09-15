@@ -8,9 +8,6 @@ This repository compares two C implementations for solving a 9 × 9 Sudoku. Both
 
 - [`sudoku-bt.c`](sudoku-bt.c) — the baseline recursive backtracking solver.
 - [`sudoku-mrv.c`](sudoku-mrv.c) — a solver using candidate domains and the Minimum Remaining Values (MRV) heuristic.
-- [`examples/wikipedia.txt`](examples/wikipedia.txt) — a complete example puzzle.
-- [`examples/wikipedia-solution.txt`](examples/wikipedia-solution.txt) — the expected solution for the example.
-- [`scripts/test-example.sh`](scripts/test-example.sh) — compiles both solvers and verifies the example output.
 
 ## Research paper
 
@@ -28,19 +25,14 @@ gcc -O2 -std=c11 -o sudoku-mrv sudoku-mrv.c
 
 Each known digit is a separate three-digit argument in the form `row-column-number`, using 1-based positions. For example, `115` places digit 5 at row 1, column 1.
 
-Run both solvers on the included complete example:
+After compilation, pass every given cell of the chosen puzzle as a separate row-column-number argument.
 
 ```bash
-./sudoku-bt $(grep -v '^#' examples/wikipedia.txt)
-./sudoku-mrv $(grep -v '^#' examples/wikipedia.txt)
+./sudoku-bt 115 123 157
+./sudoku-mrv 115 123 157
 ```
 
-To compile and check both implementations automatically:
-
-```bash
-./scripts/test-example.sh
-```
-
+The two commands must receive the same complete puzzle input when their behavior is compared.
 ## 1. Baseline solver: `sudoku-bt.c`
 
 The baseline uses depth-first search with recursive backtracking.
@@ -93,23 +85,6 @@ This restoration is necessary because candidate masks describe one particular pa
 ### Scope of the propagation step
 
 `propagate_constraints()` recomputes candidate masks until they stop changing and recognizes contradictions created during recomputation. This is lightweight candidate-domain pruning, often called forward checking. It does not automatically fill single-candidate cells, and it does not implement hidden singles, pairs, or AC-3 queue propagation.
-
-## 3. Reproducible check
-
-The example test script compiles both programs with `cc -O2 -std=c11`, runs them on `examples/wikipedia.txt`, removes terminal colour escape codes, and verifies the solved 9 × 9 grid against `examples/wikipedia-solution.txt`.
-
-For a fair comparison, use the same complete input, compiler, optimization flags, and machine for both programs. The timer inside each program uses C's `clock()`, so its output is CPU time rather than wall-clock time.
-
-## 4. Representative benchmark
-
-The following result was obtained from 20 runs of the harder example in `examples/hard.txt` on an ARM64 Mac using Apple Clang 21.0.0 with `-O2 -std=c11`. Values are the mean CPU time reported by the programs.
-
-| Solver | Mean CPU time | Relative to baseline |
-| --- | ---: | ---: |
-| `sudoku-bt.c` | 1.457 ms | 1.00× |
-| `sudoku-mrv.c` | 8.447 ms | 0.17× |
-
-For this implementation and test case, the MRV version is slower. It recomputes candidate masks for the whole board and copies all masks at each branch, so its additional bookkeeping can outweigh the reduced search. MRV is a useful search heuristic, but this code should not be presented as having a fixed speed advantage for every puzzle. Profiling on multiple puzzle sets is required before making broader performance claims.
 
 ## Limitations
 
