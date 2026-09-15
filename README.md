@@ -1,51 +1,57 @@
 # Sudoku Solver Implementations
 
-This repository contains two C implementations used to compare ordinary Sudoku backtracking with a more informed search strategy. Both programs solve a 9 × 9 Sudoku and print the first valid solution they find. They use the same command-line input, so they can be run on the same puzzle for a fair comparison.
+**Author:** Sitan Chen
 
-## Files
+This repository compares two C implementations for solving a 9 × 9 Sudoku. Both programs accept the same puzzle input and print the first valid solution. The difference is the order in which they explore the search tree.
 
-- [`sudoku-bt.c`](sudoku-bt.c) — baseline recursive backtracking.
-- [`sudoku-mrv.c`](sudoku-mrv.c) — backtracking with candidate domains and the Minimum Remaining Values (MRV) heuristic.
+## Repository layout
 
-## Input format
+- [`sudoku-bt.c`](sudoku-bt.c) — the baseline recursive backtracking solver.
+- [`sudoku-mrv.c`](sudoku-mrv.c) — a solver using candidate domains and the Minimum Remaining Values (MRV) heuristic.
+- [`examples/wikipedia.txt`](examples/wikipedia.txt) — a complete example puzzle.
+- [`examples/wikipedia-solution.txt`](examples/wikipedia-solution.txt) — the expected solution for the example.
+- [`scripts/test-example.sh`](scripts/test-example.sh) — compiles both solvers and verifies the example output.
 
-Each known digit is a separate three-digit command-line argument in the form `row-column-number`. Rows and columns are 1-based. For example:
+## Build and run
 
-- `115` means “place digit 5 at row 1, column 1”.
-- `987` means “place digit 7 at row 9, column 8”.
-
-The following commands compile the programs with GCC or Clang:
+Compile with GCC or Clang:
 
 ```bash
 gcc -O2 -std=c11 -o sudoku-bt sudoku-bt.c
 gcc -O2 -std=c11 -o sudoku-mrv sudoku-mrv.c
 ```
 
-Run either program by passing all given cells of the same puzzle:
+Each known digit is a separate three-digit argument in the form `row-column-number`, using 1-based positions. For example, `115` places digit 5 at row 1, column 1.
+
+Run both solvers on the included complete example:
 
 ```bash
-./sudoku-bt 115 123 157 216 241 259 265 329 338
-./sudoku-mrv 115 123 157 216 241 259 265 329 338
+./sudoku-bt $(grep -v '^#' examples/wikipedia.txt)
+./sudoku-mrv $(grep -v '^#' examples/wikipedia.txt)
 ```
 
-The example above is intentionally incomplete; a normal run must include every given cell of the chosen puzzle.
+To compile and check both implementations automatically:
+
+```bash
+./scripts/test-example.sh
+```
 
 ## 1. Baseline solver: `sudoku-bt.c`
 
-The baseline is a depth-first search with backtracking.
+The baseline uses depth-first search with recursive backtracking.
 
 1. `find_empty()` scans the board from top-left to bottom-right and returns the first cell containing `0`.
-2. `solve()` tries the digits 1 through 9 in that cell.
-3. `is_valid()` rejects a digit already present in the same row, column, or 3 × 3 box.
-4. If a digit is legal, the program writes it to the board and recursively solves the remaining empty cells.
-5. If that recursive branch cannot complete the puzzle, the program changes the cell back to `0` and tries the next digit.
-6. If every digit fails, the function returns `false` to make its caller backtrack as well.
+2. `solve()` tries digits 1 through 9 in that cell.
+3. `is_valid()` rejects a digit that already appears in the same row, column, or 3 × 3 box.
+4. For a legal digit, the program writes the value and recursively solves the remaining empty cells.
+5. If the recursive branch fails, the value is reset to `0` and the next digit is tried.
+6. If every digit fails, `solve()` returns `false`, causing the preceding recursive call to backtrack.
 
-This version is a useful reference because every step is easy to follow. Its weakness is the fixed choice of the next cell: it may make several guesses in an unconstrained part of the board before discovering a contradiction elsewhere. With `E` empty cells, the naïve search space has a worst-case upper bound of `O(9^E)`, although row, column, and box checks prune many branches in practice.
+This implementation is intentionally direct and serves as the reference solver. Its weakness is its fixed cell order: it may make several guesses in a loosely constrained region before reaching a contradiction elsewhere. If there are `E` empty cells, the naïve search space has a worst-case upper bound of `O(9^E)`, though Sudoku constraints prune many branches in practice.
 
 ## 2. MRV solver: `sudoku-mrv.c`
 
-The optimized solver keeps two pieces of information for every position:
+The MRV version stores both a cell value and a set of legal candidates:
 
 ```c
 typedef struct {
@@ -54,44 +60,58 @@ typedef struct {
 } Cell;
 ```
 
-`ALL_CANDIDATES` is `0x1ff`, whose nine low bits are all 1. Bit 0 represents digit 1, bit 1 represents digit 2, and so on through bit 8 for digit 9. If digit 5 cannot appear in a cell, the program clears bit 4 from that cell's mask.
+`ALL_CANDIDATES` is `0x1ff`: its lowest nine bits are all set. Bit 0 represents digit 1, bit 1 represents digit 2, and bit 8 represents digit 9. If digit 5 is impossible in a cell, the solver clears bit 4.
 
-### Candidate-domain update
+### Candidate-domain pruning
 
-`update_candidates()` recomputes the possible digits of every empty cell from the current board:
+`update_candidates()` recomputes the domain of every empty cell from the current board:
 
-1. Start with all nine bits enabled.
-2. Remove digits already used in the cell's row.
-3. Remove digits already used in its column.
-4. Remove digits already used in its 3 × 3 box.
+1. Start with every digit from 1 through 9 enabled.
+2. Clear digits already used in the cell's row.
+3. Clear digits already used in its column.
+4. Clear digits already used in its 3 × 3 box.
 
-If a cell is left with no candidate bits, the current partial board is contradictory and the branch can stop immediately. This is candidate-domain pruning: impossible choices are removed before the program attempts them.
+A cell with no remaining candidate is contradictory. The solver can reject that branch rather than attempting digits that cannot lead to a valid board.
 
-### MRV selection
+### Minimum Remaining Values
 
-`find_mrv_cell()` counts the set bits in every empty cell's candidate mask with `__builtin_popcount()`. It selects the cell with the fewest candidates, following the Minimum Remaining Values heuristic.
+`find_mrv_cell()` counts the enabled bits in every empty cell with `__builtin_popcount()` and chooses the cell with the smallest count. This is the Minimum Remaining Values heuristic.
 
-This changes the order of search. A cell with one or two possible digits is usually more informative than one with six or seven. Trying the most restricted cell first tends to reveal an impossible branch near the top of the search tree, rather than after many later guesses.
+Choosing the most restricted cell first often exposes a contradiction near the top of the search tree. It changes the **order** of search, not the Sudoku rules or the definition of a valid solution.
 
-### Backtracking and state restoration
+### Backtracking state restoration
 
-Before branching, the MRV solver copies all candidate masks into `saved_candidates`. It then tests only the digits whose bits are set in the selected cell. When a recursive attempt fails, it clears the assigned value and restores the saved masks before trying the next candidate.
+Before trying a candidate, the solver saves every candidate mask in `saved_candidates`. If the recursive branch fails, it clears the chosen value and restores those masks before trying the next candidate.
 
-Restoring this state is essential. Candidate masks describe one specific partial board; without restoration, values ruled out by a failed branch could incorrectly remain unavailable in a different branch.
+This restoration is necessary because candidate masks describe one particular partial board. Without it, a value ruled out by a failed branch could incorrectly remain unavailable in a different branch.
 
-### What “constraint propagation” means here
+### Scope of the propagation step
 
-`propagate_constraints()` repeatedly recalculates candidate masks until they are stable and rejects an empty candidate domain. This is a lightweight form of constraint propagation, often called forward checking. It does **not** automatically place a digit when a cell has only one candidate, and it does not include techniques such as hidden singles, pairs, or AC-3 queue propagation. The improvement comes chiefly from early contradiction detection and MRV cell selection.
+`propagate_constraints()` recomputes candidate masks until they stop changing and recognizes contradictions created during recomputation. This is lightweight candidate-domain pruning, often called forward checking. It does not automatically fill single-candidate cells, and it does not implement hidden singles, pairs, or AC-3 queue propagation.
 
-## 3. Comparing the programs
+## 3. Reproducible check
 
-Both programs use the same Sudoku rules and return the first solution they find. The MRV version does not alter the definition of a valid solution; it changes only the search order and avoids testing digits that are already impossible.
+The example test script compiles both programs with `cc -O2 -std=c11`, runs them on `examples/wikipedia.txt`, removes terminal colour escape codes, and verifies the solved 9 × 9 grid against `examples/wikipedia-solution.txt`.
 
-For a meaningful timing comparison:
+For a fair comparison, use the same complete input, compiler, optimization flags, and machine for both programs. The timer inside each program uses C's `clock()`, so its output is CPU time rather than wall-clock time.
 
-1. Compile both programs with the same compiler and optimization flags.
-2. Use exactly the same complete puzzle input.
-3. Run each program multiple times and compare an average, especially for easy puzzles whose execution time is very short.
-4. Treat the printed time as CPU time because the programs use C's `clock()` function.
+## 4. Representative benchmark
 
-The programs assume valid three-digit arguments and do not currently verify whether a puzzle has a unique solution. They are intended as solver implementations and an algorithmic comparison, rather than a full input-validation application.
+The following result was obtained from 20 runs of the harder example in `examples/hard.txt` on an ARM64 Mac using Apple Clang 21.0.0 with `-O2 -std=c11`. Values are the mean CPU time reported by the programs.
+
+| Solver | Mean CPU time | Relative to baseline |
+| --- | ---: | ---: |
+| `sudoku-bt.c` | 1.457 ms | 1.00× |
+| `sudoku-mrv.c` | 8.447 ms | 0.17× |
+
+For this implementation and test case, the MRV version is slower. It recomputes candidate masks for the whole board and copies all masks at each branch, so its additional bookkeeping can outweigh the reduced search. MRV is a useful search heuristic, but this code should not be presented as having a fixed speed advantage for every puzzle. Profiling on multiple puzzle sets is required before making broader performance claims.
+
+## Limitations
+
+- The programs assume valid three-digit arguments and do not yet provide full input validation.
+- They stop at the first solution and do not test whether that solution is unique.
+- `__builtin_popcount()` is supported by GCC and Clang; a portability wrapper would be needed for some other C compilers.
+
+## License
+
+No software license has been selected yet. Choose a license before redistributing or accepting outside contributions.
