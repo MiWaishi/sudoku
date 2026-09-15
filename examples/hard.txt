@@ -1,0 +1,22 @@
+# Harder Sudoku example used for the representative benchmark.
+118
+233
+246
+327
+359
+372
+425
+467
+554
+565
+577
+641
+683
+731
+786
+798
+838
+845
+881
+929
+974
