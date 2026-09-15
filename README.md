@@ -116,5 +116,4 @@ For this implementation and test case, the MRV version is slower. It recomputes 
 
 - The programs assume valid three-digit arguments and do not yet provide full input validation.
 - They stop at the first solution and do not test whether that solution is unique.
-- `__builtin_popcount()` is supported by GCC and Clang; a portability wrapper would be needed for some other C compilers.
 
